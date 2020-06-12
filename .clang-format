@@ -1,0 +1,21 @@
+---
+BasedOnStyle:                    LLVM
+
+AlignConsecutiveAssignments:     true
+AllowShortBlocksOnASingleLine:   true
+AlignConsecutiveDeclarations:    true
+AlwaysBreakTemplateDeclarations: true
+BinPackParameters:               false
+BreakBeforeInheritanceComma:     true
+BreakConstructorInitializers:    BeforeComma
+
+BraceWrapping:
+  AfterClass:      true
+  AfterFunction:   true
+BreakBeforeBraces:               Custom
+
+IndentWidth:                     4
+NamespaceIndentation:            None
+PointerAlignment:                Right
+PointerBindsToType:              true
+SpacesBeforeTrailingComments:    2

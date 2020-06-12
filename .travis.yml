@@ -1,0 +1,25 @@
+language: cpp
+
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+            - sourceline: "ppa:ubuntu-toolchain-r/test"
+          packages:
+            - g++-9
+            - gcc-9
+      env:
+        - CC=gcc-9
+        - CXX=g++-9
+    - os: osx
+      osx_image: xcode11.5
+    - os: windows
+
+script:
+  - mkdir build && cd build
+  - cmake -DBUILD_TESTS=yes ..
+  - cmake --build . --target parallel_check
