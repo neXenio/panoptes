@@ -149,6 +149,10 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
         auto watcher =
             std::make_shared<TestFileSystemAdapter>(absWatchedDir, mLatency);
 
+        // lets give the file watcher some time to initialize, otherwise it is
+        // possible, that some changes inside of the test will be missed
+        std::this_thread::sleep_for(10ms);
+
         return watcher;
     };
 
