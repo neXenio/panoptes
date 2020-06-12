@@ -14,7 +14,7 @@ Panoptes is observing all changes inside of a given directory. This includes add
 
 * Windows: [ReadDirectoryChangesW](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-readdirectorychangesw)
 * macOS: [File System Events](https://developer.apple.com/documentation/coreservices/file_system_events)
-* Linux: [inotify] (https://www.man7.org/linux/man-pages/man7/inotify.7.html)
+* Linux: [inotify](https://www.man7.org/linux/man-pages/man7/inotify.7.html)
 
 ## How to use it
 
