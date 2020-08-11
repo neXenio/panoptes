@@ -37,12 +37,12 @@ endif (UNIX)
 # Configure Sources.
 #
 
-set (PANOPTES_INCLUDE_DIR       "${CMAKE_SOURCE_DIR}/include")
-set (PANOPTES_SRC               "${CMAKE_SOURCE_DIR}/src")
-set (PANOPTES_CONSOLE           "${CMAKE_SOURCE_DIR}/console")
-set (PANOPTES_TESTING           "${CMAKE_SOURCE_DIR}/test")
+set (PANOPTES_INCLUDE_DIR       "${CMAKE_CURRENT_SOURCE_DIR}/include")
+set (PANOPTES_SRC               "${CMAKE_CURRENT_SOURCE_DIR}/src")
+set (PANOPTES_CONSOLE           "${CMAKE_CURRENT_SOURCE_DIR}/console")
+set (PANOPTES_TESTING           "${CMAKE_CURRENT_SOURCE_DIR}/test")
 set (PANOPTES_LIBRARY_NAME      "PanoptesFW")
-set (CMAKE_MODULE_PATH          "${CMAKE_SOURCE_DIR}/cmake/modules")
+set (CMAKE_MODULE_PATH          "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 
 if (APPLE)
     find_library(CORE_SERVICES CoreServices)
