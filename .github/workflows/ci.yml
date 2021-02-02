@@ -1,0 +1,25 @@
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-20.04]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ilammy/msvc-dev-cmd@v1
+      if: runner.os == 'Windows'
+    - name: Generating Makefiles
+      shell: bash
+      run: |
+        if [[ "${{ runner.os }}" == "Windows" ]] ; then
+          cmake . -G "NMake Makefiles" -DBUILD_TESTS=ON
+        else
+          cmake . -G "Unix Makefiles" -DBUILD_TESTS=ON
+        fi
+    - name: Building
+      shell: bash
+      run: |
+        cmake --build . --target parallel_check
