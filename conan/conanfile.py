@@ -2,8 +2,8 @@ from conans import ConanFile, CMake, tools
 from os import path
 
 class PanoptesConan(ConanFile):
-    name = "Panoptes"
-    version = "1.0"
+    name = "panoptes"
+    version = "1.0.2"
     license = "MIT"
     url = "https://github.com/neXenio/panoptes.git"
     author = "Mathias Eggert <mathias.eggert@outlook.com>"
@@ -35,4 +35,4 @@ class PanoptesConan(ConanFile):
         self.copy(pattern="LICENSE", dst='licenses', src=build_dir, ignore_case=True, keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["pfw"]
+        self.cpp_info.libs = ["PanoptesFW"]
