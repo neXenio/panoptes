@@ -1,5 +1,6 @@
 # platform independent code
 set (PANOPTES_LIBRARY_INCLUDES
+    "${PANOPTES_INCLUDE_DIR}/pfw/internal/definitions.h"
     "${PANOPTES_INCLUDE_DIR}/pfw/Event.h"
     "${PANOPTES_INCLUDE_DIR}/pfw/FileSystemWatcher.h"
     "${PANOPTES_INCLUDE_DIR}/pfw/Filter.h"
