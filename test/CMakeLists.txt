@@ -11,7 +11,7 @@ message (STATUS "Running CMake for ${PROJECT_NAME} ${DVAULT_VERSION_STRING} test
 set (PANOPTES_TESTHELPER_SOURCES
   "testutil/CoreFoundationHelper.h"
   "testutil/test_helper.h"
-  "testutil/FileSandbox.h"    "testutil/FileSandbox.cpp"
+  "testutil/FileSandbox.h"
 )
 
 set (PANOPTES_GLOBAL_TEST_SOURCES

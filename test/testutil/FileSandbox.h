@@ -183,7 +183,9 @@ class FileSandbox
         std::vector<std::filesystem::path> result;
 
         for (auto &path :
-             std::filesystem::recursive_directory_iterator(_path)) {
+             std::filesystem::recursive_directory_iterator(
+                _path,
+                std::filesystem::directory_options::skip_permission_denied)) {
             result.push_back(path);
         }
 

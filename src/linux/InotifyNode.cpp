@@ -63,7 +63,10 @@ void InotifyNode::initRecursively(bool bSendInitEvent)
 {
     std::error_code ec;
     auto            dirItr =
-        std::filesystem::directory_iterator(mFileWatcherRoot / mRelPath, ec);
+        std::filesystem::directory_iterator(
+            mFileWatcherRoot / mRelPath,
+            std::filesystem::directory_options::skip_permission_denied,
+            ec);
     if (ec) {
         return;
     }
