@@ -14,10 +14,12 @@
 #include "testutil/FileSandbox.h"
 #include "testutil/test_helper.h"
 
+#include "pfw/internal/definitions.h"
+
 using namespace std::chrono_literals;
 using namespace pfw;
 
-#if defined(__APPLE__)
+#ifdef PFW_APPLE
 static constexpr const int                       grace_period_ms = 2050;
 static constexpr const std::chrono::milliseconds defaultLatency  = 1000ms;
 #else
@@ -263,7 +265,7 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
         CHECK(watcher->isWatching());
     }
 
-#ifndef __APPLE__
+#ifndef PFW_APPLE
     // disabled under MacOS because under HFS+ composed file name are not
     // valid. With APFS it works.
     SECTION("file creation unicode composed")
@@ -313,7 +315,7 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
         CHECK(watcher->isWatching());
     }
 
-#ifndef __LINUX__
+#ifndef PFW_LINUX
     // linux has nearly always a case-sensitive file system
     SECTION("file modification (upper case lower case)")
     {
@@ -333,7 +335,7 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
     }
 #endif
 
-#ifndef __APPLE__
+#ifndef PFW_APPLE
     // disabled under MacOS because under HFS+ composed file name are not
     // valid. With APFS it works.
     SECTION("file modification unicode composed")
@@ -422,7 +424,7 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
         CHECK(watcher->isWatching());
     }
 
-#ifndef __LINUX__
+#ifndef PFW_LINUX
     // linux is by default case sensitive. Because of that this test will
     // not works under linux
     SECTION("file deletion case upper case")
@@ -437,7 +439,7 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
 
         std::vector<ExpectedEvent> expectedEvents;
 
-#if defined(__APPLE__)
+#ifdef PFW_APPLE
         // from my point of view this is an bug inside of the apple api. But
         // apple does not want to fix that.
         // source: https://forums.developer.apple.com/thread/103108
@@ -455,12 +457,12 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
     }
 #endif
 
-#ifndef __APPLE__
+#ifndef PFW_APPLE
     // disabled under MacOS because under HFS+ composed file name are not
     // valid. With APFS it works.
     SECTION("add file in unicode directory composed")
     {
-#ifndef __LINUX__
+#ifndef PFW_LINUX
         fs::path dirNameComposed = fs::path(L"fold\u00E4");
 #else
         fs::path dirNameComposed = fs::path(u8"foldä");
@@ -483,7 +485,7 @@ TEST_CASE("test the file system watcher", "[FileSystemWatcher]")
 
     SECTION("add file in unicode directory decomposed")
     {
-#ifndef __LINUX__
+#ifndef PFW_LINUX
         fs::path dirNameDecomposed = fs::path(L"folda\u00A8");
 #else
         fs::path dirNameDecomposed = fs::path(u8"folda¨");

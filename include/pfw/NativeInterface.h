@@ -1,13 +1,15 @@
 #ifndef PFW_NATIVE_INTERFACE_H
 #define PFW_NATIVE_INTERFACE_H
 
-#if defined(__WINDOWS__)
+#include "pfw/internal/definitions.h"
+
+#ifdef PFW_WINDOWS
 #include "pfw/win32/Controller.h"
 using NativeImplementation = pfw::Controller;
-#elif defined(__APPLE__)
+#elif PFW_APPLE
 #include "pfw/osx/FSEventsService.h"
 using NativeImplementation = pfw::FSEventsService;
-#elif defined(__LINUX__)
+#elif PFW_LINUX
 #include "pfw/linux/InotifyService.h"
 using NativeImplementation = pfw::InotifyService;
 #endif

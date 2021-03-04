@@ -19,21 +19,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option (BUILD_TESTS "Build the ${PROJECT_NAME} test binaries" OFF)
 
 #
-# Add a definition for each OS.
-#
-
-if (WIN32)
-    add_definitions ("-D__WINDOWS__")
-endif (WIN32)
-if (UNIX)
-    if (APPLE)
-        add_definitions ("-D__APPLE__")
-    else (APPLE)
-        add_definitions ("-D__LINUX__")
-    endif(APPLE)
-endif (UNIX)
-
-#
 # Configure Sources.
 #
 

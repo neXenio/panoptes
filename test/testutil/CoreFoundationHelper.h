@@ -1,7 +1,9 @@
 #ifndef PFW_CORE_FOUNDATION_HELPER_H
 #define PFW_CORE_FOUNDATION_HELPER_H
 
-#if defined(__APPLE__)
+#include "pfw/internal/definitions.h"
+
+#ifdef PFW_APPLE
 
 #include <CoreServices/CoreServices.h>
 
