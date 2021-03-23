@@ -46,11 +46,11 @@ class InotifyTree
     void         removeNodeReferenceByWD(int watchDescriptor);
     InotifyNode *getInotifyTreeByWatchDescriptor(int watchDescriptor);
 
-    std::mutex                    mapBlock;
-    std::shared_ptr<Collector>    mCollector;
-    const int                     mInotifyInstance;
-    std::map<int, InotifyNode *> *mInotifyNodeByWatchDescriptor;
-    InotifyNode *                 mRoot;
+    std::mutex                   mapBlock;
+    std::shared_ptr<Collector>   mCollector;
+    const int                    mInotifyInstance;
+    std::map<int, InotifyNode *> mInotifyNodeByWatchDescriptor;
+    InotifyNode *                mRoot;
 
     friend class InotifyNode;
 };

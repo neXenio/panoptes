@@ -9,8 +9,6 @@ InotifyTree::InotifyTree(int                          inotifyInstance,
     , mInotifyInstance(inotifyInstance)
     , mCollector(collector)
 {
-    mInotifyNodeByWatchDescriptor = new std::map<int, InotifyNode *>;
-
     if (!std::filesystem::exists(path)) {
         mCollector->sendError("Failed to open directory.");
         return;
@@ -35,8 +33,8 @@ void InotifyTree::sendInitEvent(const std::filesystem::path relPath)
 InotifyNode *InotifyTree::getInotifyTreeByWatchDescriptor(int watchDescriptor)
 {
     std::lock_guard<std::mutex> locked(mapBlock);
-    auto nodeIterator = mInotifyNodeByWatchDescriptor->find(watchDescriptor);
-    if (nodeIterator == mInotifyNodeByWatchDescriptor->end()) {
+    auto nodeIterator = mInotifyNodeByWatchDescriptor.find(watchDescriptor);
+    if (nodeIterator == mInotifyNodeByWatchDescriptor.end()) {
         return NULL;
     }
 
@@ -57,7 +55,7 @@ void InotifyTree::addDirectory(int                          wd,
 void InotifyTree::addNodeReferenceByWD(int wd, InotifyNode *node)
 {
     std::lock_guard<std::mutex> locked(mapBlock);
-    (*mInotifyNodeByWatchDescriptor)[wd] = node;
+    mInotifyNodeByWatchDescriptor[wd] = node;
 }
 
 bool InotifyTree::getRelPath(std::filesystem::path &out, int wd)
@@ -77,8 +75,8 @@ bool InotifyTree::isRootAlive() { return mRoot != NULL; }
 bool InotifyTree::nodeExists(int wd)
 {
     std::lock_guard<std::mutex> locked(mapBlock);
-    auto nodeIterator = mInotifyNodeByWatchDescriptor->find(wd);
-    return nodeIterator != mInotifyNodeByWatchDescriptor->end();
+    auto nodeIterator = mInotifyNodeByWatchDescriptor.find(wd);
+    return nodeIterator != mInotifyNodeByWatchDescriptor.end();
 }
 
 void InotifyTree::removeDirectory(int wd, const std::filesystem::path &name)
@@ -112,9 +110,9 @@ void InotifyTree::removeDirectory(int wd)
 void InotifyTree::removeNodeReferenceByWD(int wd)
 {
     std::lock_guard<std::mutex> locked(mapBlock);
-    auto nodeIterator = mInotifyNodeByWatchDescriptor->find(wd);
-    if (nodeIterator != mInotifyNodeByWatchDescriptor->end()) {
-        mInotifyNodeByWatchDescriptor->erase(nodeIterator);
+    auto nodeIterator = mInotifyNodeByWatchDescriptor.find(wd);
+    if (nodeIterator != mInotifyNodeByWatchDescriptor.end()) {
+        mInotifyNodeByWatchDescriptor.erase(nodeIterator);
     }
 }
 

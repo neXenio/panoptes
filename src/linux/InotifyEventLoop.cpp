@@ -36,10 +36,10 @@ void InotifyEventLoop::created(inotify_event *event,
     }
 
     if (isDirectoryEvent) {
-        mInotifyService->createDirectory(event->wd, strdup(event->name),
+        mInotifyService->createDirectory(event->wd, event->name,
                                          sendInitEvents);
     } else {
-        mInotifyService->create(event->wd, strdup(event->name));
+        mInotifyService->create(event->wd, event->name);
     }
 }
 void InotifyEventLoop::modified(inotify_event *event)
@@ -48,7 +48,7 @@ void InotifyEventLoop::modified(inotify_event *event)
         return;
     }
 
-    mInotifyService->modify(event->wd, strdup(event->name));
+    mInotifyService->modify(event->wd, event->name);
 }
 void InotifyEventLoop::deleted(inotify_event *event, bool isDirectoryRemoval)
 {
@@ -59,7 +59,7 @@ void InotifyEventLoop::deleted(inotify_event *event, bool isDirectoryRemoval)
     if (isDirectoryRemoval) {
         mInotifyService->removeDirectory(event->wd);
     } else {
-        mInotifyService->remove(event->wd, strdup(event->name));
+        mInotifyService->remove(event->wd, event->name);
     }
 }
 void InotifyEventLoop::moveStart(inotify_event *     event,
@@ -180,8 +180,7 @@ void *InotifyEventLoop::work(void *args)
 
                 eventLoop->moveStart(event, isDirectoryEvent, renameEvent);
             } else if (event->mask & (uint32_t)IN_MOVE_SELF) {
-                eventLoop->mInotifyService->remove(event->wd,
-                                                   strdup(event->name));
+                eventLoop->mInotifyService->remove(event->wd, event->name);
                 eventLoop->mInotifyService->removeDirectory(event->wd);
             }
         } while ((position += sizeof(struct inotify_event) + event->len) <
