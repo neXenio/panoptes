@@ -3,7 +3,7 @@ from os import path
 
 class PanoptesConan(ConanFile):
     name = "panoptes"
-    version = "1.0.3"
+    version = "1.0.4"
     license = "MIT"
     url = "https://github.com/neXenio/panoptes.git"
     author = "Mathias Eggert <mathias.eggert@outlook.com>"
